@@ -3,7 +3,7 @@
 ## Part 1
 library(tidyverse)
 
-input <- read_delim("inputs/input-1.txt", delim = "\n", skip_empty_rows = FALSE, col_names = FALSE) |> 
+input <- read_delim("inputs/input-01.txt", delim = "\n", skip_empty_rows = FALSE, col_names = FALSE) |> 
   unnest(cols = c())
 
 elf_calories <- input |> 
