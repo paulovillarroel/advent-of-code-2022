@@ -18,7 +18,6 @@ sum(assignments$fully_overlap)
 
 
 ## Part 2
-
 assignments <- assignments |> 
   mutate(overlap = ifelse((end_1 >= start_2 & end_2 >= start_1) | (start_1 <= end_2 & end_1 >= start_2), 1, 0))
 
