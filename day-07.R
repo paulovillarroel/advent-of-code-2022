@@ -4,7 +4,10 @@
 
 library(tidyverse)
 
-input <- read_csv("inputs/input-07.txt", col_names = c("line"), show_col_types = FALSE)
+input <- read_delim("inputs/input-07.txt", delim = "\n", skip_empty_rows = FALSE, col_names = FALSE) |>
+  unnest(cols = c())
+
+names(input) <- "line"
 
 cd <- function(path, dir = NA) {
   if (any(is.na(dir))) {
