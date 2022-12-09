@@ -78,14 +78,12 @@ distances <- function(value, row, col, up, left, down, right) {
 scores <- grid |> 
   filter(value > 5) |> 
   rowwise() |> 
-  mutate(up = direcctions_up(grid, row, col)) |> 
-  mutate(down = direcctions_down(grid, row, col)) |> 
-  mutate(right = direcctions_right(grid, row, col)) |> 
-  mutate(left = direcctions_left(grid, row, col)) |> 
-  mutate(distances = distances(
-    value, row, col, up, left, down, right
-  )) |> 
-  mutate(scenic_score = prod(distances)) |> 
+  mutate(up = direcctions_up(grid, row, col),
+         down = direcctions_down(grid, row, col),
+         right = direcctions_right(grid, row, col),
+         left = direcctions_left(grid, row, col),
+         distances = distances(value, row, col, up, left, down, right),
+         scenic_score = prod(distances)) |> 
   arrange(-scenic_score)
 
-head(scores)
+head(scores, 1)
