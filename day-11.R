@@ -76,7 +76,7 @@ monkeys <- watch_monkeys(monkeys_bkup, 20, function(x) {
   return(x %/% 3)
 })
 
-ans1 <- sapply(monkeys, function(x) {
+sapply(monkeys, function(x) {
   x[["inspection count"]]
 }) %>%
   sort(decreasing = TRUE) %>%
@@ -93,7 +93,7 @@ monkeys <- watch_monkeys(monkeys_bkup, 10000, function(x) {
   return(x %% gcd)
 })
 
-ans2 <- sapply(monkeys, function(x) {
+sapply(monkeys, function(x) {
   x[["inspection count"]]
 }) %>%
   sort(decreasing = TRUE) %>%
