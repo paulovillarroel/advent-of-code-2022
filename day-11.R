@@ -48,24 +48,23 @@ for (i in 1:length(monkeys)) {
 
 monkeys_bkup <- monkeys
 
-watch_monkeys <- function(monkeys, n_rounds, chill_func) {
-  for (round in 1:n_rounds) {
-    for (turn in 1:length(monkeys)) {
-      while (length(monkeys[[turn]][["items"]] > 0)) {
+watch_monkeys <- function(monkeys, n_rounds, chill_func){
+  for(round in 1:n_rounds){
+    for (turn in 1:length(monkeys)){
+      while (length(monkeys[[turn]][["items"]] > 0)){
+        
         item <- monkeys[[turn]][["items"]][1]
         monkeys[[turn]][["items"]] <- monkeys[[turn]][["items"]][-1]
-
-        inspected_item <- item %>%
-          monkeys[[turn]][["operation"]](.) |>
-          chill_func()
+        
+        inspected_item <- item %>% monkeys[[turn]][["operation"]](.) %>% chill_func
         monkeys[[turn]][["inspection count"]] <- monkeys[[turn]][["inspection count"]] + 1
-
-        if (inspected_item %% monkeys[[turn]][["test div"]] == 0) {
+        
+        if (inspected_item %% monkeys[[turn]][["test div"]] == 0){
           target_monkey <- monkeys[[turn]][["true throw"]]
         } else {
           target_monkey <- monkeys[[turn]][["false throw"]]
         }
-
+        
         monkeys[[target_monkey]][["items"]] <- c(monkeys[[target_monkey]][["items"]], inspected_item)
       }
     }
@@ -73,14 +72,16 @@ watch_monkeys <- function(monkeys, n_rounds, chill_func) {
   return(monkeys)
 }
 
-
 monkeys <- watch_monkeys(monkeys_bkup, 20, function(x) {
   return(x %/% 3)
 })
 
-(ans1 <- sapply(monkeys, function(x) {
+ans1 <- sapply(monkeys, function(x) {
   x[["inspection count"]]
-}) %>% sort(decreasing = TRUE) %>% .[1:2] %>% prod())
+}) %>%
+  sort(decreasing = TRUE) %>%
+  .[1:2] %>%
+  prod()
 
 
 # Part 2
@@ -92,6 +93,9 @@ monkeys <- watch_monkeys(monkeys_bkup, 10000, function(x) {
   return(x %% gcd)
 })
 
-(ans2 <- sapply(monkeys, function(x) {
+ans2 <- sapply(monkeys, function(x) {
   x[["inspection count"]]
-}) %>% sort(decreasing = TRUE) %>% .[1:2] %>% prod())
+}) %>%
+  sort(decreasing = TRUE) %>%
+  .[1:2] %>%
+  prod()
