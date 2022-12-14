@@ -60,3 +60,10 @@ divitions <- input_processed |>
             position2 = sum(div2 == 1) + 2)
 
 divitions$position1 * divitions$position2
+
+# # Alternatively
+# divitions <- input_processed |>
+#   mutate(div1 = sapply(packet, compare, y = list(list(2))),
+#          div2 = sapply(packet, compare, y = list(list(6)))) |>
+#   summarise(position1 = sum(div1 == 1) + 1,
+#             position2 = sum(div2 == 1) + 2)
