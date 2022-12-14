@@ -53,3 +53,10 @@ packets
 
 
 ## Part 2
+divitions <- input_processed |> 
+  mutate(div1 = map_dbl(packet, compare, list(list(2))),
+         div2 = map_dbl(packet, compare, list(list(6)))) |> 
+  summarise(position1 = sum(div1 == 1) + 1,
+            position2 = sum(div2 == 1) + 2)
+
+divitions$position1 * divitions$position2
